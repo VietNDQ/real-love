@@ -1,0 +1,127 @@
+<!-- love.html -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Real Love</title>
+
+  <style>
+    :root { --pink: #f72585; --bg: #fde7f3; }
+
+    html, body { height: 100%; margin: 0; }
+    body{
+      display:grid; place-items:center;
+      background:radial-gradient(120% 120% at 50% 110%, #871438 0%, #520b3c 45%, #201a47 70%, #560951 100%);
+      font-family: "Monotype Corsiva", "Brush Script MT", "Segoe Script", cursive;
+      overflow:hidden;
+    }
+
+    .stage{
+      text-align:center;
+      position: relative;
+      width: min(900px, 92vw);
+      padding: 32px 16px 48px;
+    }
+
+    /* Khung Lottie */
+    #kiss{
+      width: clamp(220px, 32vw, 360px);
+      height: clamp(220px, 32vw, 360px);
+      margin-inline:auto;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,.08));
+    }
+
+    /* Dòng chữ */
+    .msg{
+      color:#ff4d9d;
+      font-size: clamp(24px, 3.4vw, 40px);
+      font-weight: 400;
+      letter-spacing:.4px;
+      text-shadow: 0 2px 0 rgba(255,255,255,.6),
+                   0 10px 24px rgba(247,37,133,.25);
+      margin-top: 8px;
+    }
+
+    /* Trái tim bay từ DƯỚI LÊN */
+    .hearts{
+      position: fixed; inset: 0;
+      pointer-events:none; z-index:-1; overflow:hidden;
+    }
+    .hearts span{
+      position:absolute;
+      bottom: -12vh;                /* xuất phát dưới đáy */
+      left: calc(var(--x) * 1%);    /* vị trí ngang ngẫu nhiên */
+      font-size: clamp(14px, 2.2vw, 28px);
+      color:#ff4d9d;
+      filter: drop-shadow(0 6px 10px rgba(247,37,133,.28));
+      opacity:.9;
+      will-change: transform, opacity, margin-left;
+      animation:
+        rise linear infinite,
+        sway ease-in-out infinite;
+      animation-duration:
+        calc(6s + var(--speed)*1s),   /* tốc độ bay lên */
+        calc(2s + var(--speed)*.3s);  /* nhịp lắc */
+      animation-delay: calc(var(--delay) * -1s);
+    }
+    @keyframes rise{
+      0%   { transform: translateY(0) rotate(0);     opacity: .0; }
+      10%  { opacity: 1; }
+      100% { transform: translateY(-115vh) rotate(-360deg); opacity:.95; }
+    }
+    @keyframes sway{
+      0%,100% { margin-left: 0; }
+      50%     { margin-left: 18px; }
+    }
+
+    /* Nút quay lại (tuỳ chọn) */
+    .back{
+      position: fixed; right:14px; bottom:14px;
+      background:#ff4d9d; color:#fff; border:0; border-radius:999px;
+      padding:10px 16px; cursor:pointer; font-family:inherit;
+      box-shadow:0 10px 24px rgba(247,37,133,.35);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <!-- Lottie CAT KISS -->
+    <div id="kiss" aria-hidden="true"></div>
+    <div class="msg">Tớ biết mà! Tớ cũng thích cậu nhiều lắm 💗</div>
+  </div>
+
+  <!-- Mưa tim bay lên -->
+  <div class="hearts" id="hearts"></div>
+
+  <button class="back" onclick="history.back()">◀ Quay lại</button>
+
+  <!-- Lottie-web -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script>
+    // Nạp Lottie: CAT KISS.json
+    const anim = lottie.loadAnimation({
+      container: document.getElementById('kiss'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: './CATKISS.json'   // đảm bảo tên đúng y như file của bạn
+    });
+
+    // Tạo các trái tim bay từ dưới lên
+    const hearts = document.getElementById('hearts');
+    const HEARTS_COUNT = 46;  // tăng/giảm số lượng
+    const EMOJIS = ['💗','💖','💓','💞','💘','💝','💟'];
+
+    for (let i = 0; i < HEARTS_COUNT; i++) {
+      const s = document.createElement('span');
+      s.textContent = EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
+      s.style.setProperty('--x', Math.floor(Math.random()*100));          // vị trí ngang
+      s.style.setProperty('--delay', (Math.random()*6).toFixed(2));       // trễ
+      s.style.setProperty('--speed', (Math.random()*6).toFixed(2));       // tốc độ
+      s.style.opacity = (0.7 + Math.random()*0.3).toFixed(2);
+      hearts.appendChild(s);
+    }
+  </script>
+</body>
+</html>
