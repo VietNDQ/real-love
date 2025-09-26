@@ -1,275 +1,244 @@
 <!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Real Love</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Real Love</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
-    <style>
-      :root {
-        --btn-w: 180px;
-      }
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-      }
-      body {
-        display: grid;
-        place-items: center;
-        background: radial-gradient(
-          120% 120% at 50% 110%,
-          #871438 0%,
-          #520b3c 45%,
-          #201a47 70%,
-          #560951 100%
-        );
-        color: #fff;
-        font-family: "Monotype Corsiva", "Brush Script MT", "Segoe Script",
-          cursive;
-      }
-      main {
-        text-align: center;
-      }
-      h1 {
-        margin-bottom: 18px;
-        text-shadow: 0 4px 24px rgba(255, 255, 255, 0.22);
-      }
+  <style>
+    :root { --btn-w: 180px; }
+    html, body { height: 100%; margin: 0; }
+    body{
+      display:grid; place-items:center;
+      background:radial-gradient(120% 120% at 50% 110%, #871438 0%, #520b3c 45%, #201a47 70%, #560951 100%);
+      color:#fff; font-family:"Monotype Corsiva","Brush Script MT","Segoe Script",cursive;
+    }
+    main{text-align:center}
+    h1{margin-bottom:18px; text-shadow:0 4px 24px rgba(255,255,255,.22)}
 
-      .buttons {
-        display: inline-flex;
-        gap: 16px;
-        align-items: center;
-        justify-content: center;
-        margin-top: 28px;
-      }
-      .btn-eq {
-        width: var(--btn-w);
-        padding: 0.55rem 0;
-        border-radius: 0.7rem;
-        transition: transform 0.18s ease, box-shadow 0.18s ease;
-        font-size: 1.5rem;
-      }
-      #yes .btn-eq {
-        background: #ea2264;
-        color: #fff;
-        border: none;
-        box-shadow: 0 10px 30px rgba(220, 20, 60, 0.35);
-      }
-      #no .btn-eq {
-        background: #ea2264;
-        color: #fff;
-        border: none;
-      }
+    .buttons{
+      display:inline-flex; gap:16px; align-items:center; justify-content:center;
+      margin-top:28px;
+    }
+    .btn-eq{
+      width:var(--btn-w); padding:.55rem 0; border-radius:.7rem;
+      transition: transform .18s ease, box-shadow .18s ease;
+      font-size:1.5rem;
+    }
+    #yes .btn-eq{
+      background:#ea2264; color:#fff; border:none;
+      box-shadow:0 10px 30px rgba(220,20,60,.35);
+    }
+    #no .btn-eq{ background:#ea2264; color:#fff; border:none; }
 
-      #no.fixed {
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 9999;
-        transition: none;
-      }
+    #no.fixed{
+      position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
+      z-index:9999; transition:none;
+    }
 
-      #lottie {
-        position: fixed;
-        width: 250px;
-        height: 250px;
-        pointer-events: none;
-        z-index: 10000;
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <h1 id="heroTitle">
-        Anh thích em rất lâu rồi, làm người yêu anh nhé? 🥰
-      </h1>
+    #lottie{
+      position:fixed; width:250px; height:250px; pointer-events:none; z-index:10000;
+    }
+    #lottie img{
+      width:250px; height:250px; object-fit:contain; display:block; pointer-events:none;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 id="heroTitle">Anh thích em rất lâu rồi, làm người yêu anh nhé? 🥰</h1>
 
-      <div class="buttons">
-        <div id="yes">
-          <button class="btn btn-eq" id="btnYes">Đồng ý</button>
-        </div>
-        <div id="no">
-          <button class="btn btn-secondary btn-eq" id="btnNo">Khônggg</button>
-        </div>
-      </div>
-    </main>
+    <div class="buttons">
+      <div id="yes"><button class="btn btn-eq" id="btnYes">Đồng ý</button></div>
+      <div id="no"><button class="btn btn-secondary btn-eq" id="btnNo">Khônggg</button></div>
+    </div>
+  </main>
 
-    <div id="lottie" aria-hidden="true"></div>
+  <div id="lottie" aria-hidden="true"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-    <script>
-      const heroTitle = document.getElementById("heroTitle");
-      const lottieBox = document.getElementById("lottie");
-      const btnYes = document.getElementById("btnYes");
-      const btnNo = document.getElementById("btnNo");
-      const noWrap = document.getElementById("no");
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script>
+    const heroTitle = document.getElementById("heroTitle");
+    const lottieBox = document.getElementById("lottie");
+    const btnYes = document.getElementById("btnYes");
+    const btnNo  = document.getElementById("btnNo");
+    const noWrap = document.getElementById("no");
 
-      function placeLottieAboveTitle() {
-        const r = heroTitle.getBoundingClientRect();
-        const x = r.left + r.width / 2;
-        const y = r.top - 3;
-        lottieBox.style.left = x + "px";
-        lottieBox.style.top = y - lottieBox.offsetHeight + "px";
-        lottieBox.style.transform = "translate(-50%, 0)";
-      }
-      window.addEventListener("resize", () => {
-        placeLottieAboveTitle();
-        clampToTarget();
-        applyScales();
-      });
+    const LOVE_LINES = [
+      "Cho anh cơ hội được bên em nhé? 🥰",
+      "Em ơi, mình hẹn hò nha? 🌹",
+      "Anh thương em thật lòng, đồng ý không? 💕",
+      "Anh muốn nắm tay em đi suốt đời, được không? 🌸",
+      "Em chính là người đặc biệt của anh. Làm người yêu anh nhé? ❤️",
+      "Từ lâu anh chỉ muốn yêu em thôi. Đồng ý nhé? 💖",
+      "Anh không muốn chỉ là bạn nữa, đồng ý nhé? 💗",
+      "Em cho anh được quan tâm em mỗi ngày nha? 🥺",
+      "Anh yêu em rồi… em có yêu anh không? 🌷"
+    ];
+    let lastLineIdx = -1;
+    function setRandomTitle(){
+      let i;
+      do { i = Math.floor(Math.random() * LOVE_LINES.length); }
+      while (i === lastLineIdx && LOVE_LINES.length > 1);
+      lastLineIdx = i;
+      heroTitle.textContent = LOVE_LINES[i];
+      placeLottieAboveTitle();
+    }
 
-      let anim = null,
-        currentPath = null;
-      function showLottie(path) {
-        if (currentPath === path) return;
-        currentPath = path;
-        if (anim) {
-          anim.destroy();
-          anim = null;
-        }
-        placeLottieAboveTitle();
+    function placeLottieAboveTitle(){
+      const r = heroTitle.getBoundingClientRect();
+      const x = r.left + r.width/2;
+      const y = r.top - 3;
+      lottieBox.style.left = x + "px";
+      lottieBox.style.top  = (y - lottieBox.offsetHeight) + "px";
+      lottieBox.style.transform = "translate(-50%, 0)";
+    }
+    window.addEventListener("resize", ()=>{
+      placeLottieAboveTitle();
+      clampToTarget();
+      applyScales();
+    });
+
+    let anim = null, currentSrc = null;
+    function showVisual(src){
+      if(currentSrc === src) return;
+      currentSrc = src;
+
+      if(anim){ anim.destroy(); anim = null; }
+      lottieBox.innerHTML = "";
+      placeLottieAboveTitle();
+
+      if(src.toLowerCase().endsWith(".json")){
         anim = lottie.loadAnimation({
-          container: lottieBox,
-          renderer: "svg",
-          loop: true,
-          autoplay: true,
-          path,
+          container:lottieBox, renderer:"svg", loop:true, autoplay:true, path:src
         });
+      }else{
+        const img = new Image();
+        img.alt = "sticker";
+        img.src = src;  
+        lottieBox.appendChild(img);
+      }
+    }
+
+    const YES_VIS = "./yes.webp";  
+    const NO_VIS  = "./no.webp";   
+    btnYes.addEventListener("mouseenter", ()=>showVisual(YES_VIS));
+    btnNo .addEventListener("mouseenter", ()=>showVisual(NO_VIS));
+    btnYes.addEventListener("focus", ()=>showVisual(YES_VIS));
+    btnNo .addEventListener("focus", ()=>showVisual(NO_VIS));
+    btnYes.addEventListener("touchstart", ()=>showVisual(YES_VIS), { passive:true });
+    btnNo .addEventListener("touchstart", ()=>showVisual(NO_VIS),  { passive:true });
+
+    const STEP = 0.06;
+    const MIN_SCALE = 0.6;
+    let yesScale = 1, noScale = 1;
+
+    const HOVER_BOOST = 1.07;
+    let isYesHover = false;
+
+    function baseBtnWidth(){
+      const v = getComputedStyle(document.documentElement).getPropertyValue("--btn-w").trim();
+      return parseFloat(v);
+    }
+    function targetYesScale(){
+      const targetWidth = 0.65 * window.innerWidth;
+      return Math.max(1, targetWidth / baseBtnWidth());
+    }
+    function clampToTarget(){
+      const t = targetYesScale();
+      if(yesScale > t) yesScale = t;
+    }
+    function applyScales(){
+      const scaleDisplayYes = yesScale * (isYesHover ? HOVER_BOOST : 1);
+      btnYes.style.transform = `scale(${scaleDisplayYes})`;
+      btnNo .style.transform = `scale(${noScale})`;
+      btnYes.style.zIndex = scaleDisplayYes >= noScale ? 10001 : 1;
+    }
+    function bumpOneStep(){
+      const t = targetYesScale();
+      if(yesScale < t){ yesScale = Math.min(yesScale + STEP, t); }
+      noScale = Math.max(noScale - STEP, MIN_SCALE);
+      applyScales();
+    }
+
+    btnYes.addEventListener("mouseenter", ()=>{ isYesHover = true;  applyScales(); });
+    btnYes.addEventListener("mouseleave", ()=>{ isYesHover = false; applyScales(); });
+    btnYes.addEventListener("touchstart", ()=>{
+      isYesHover = true; applyScales();
+      setTimeout(()=>{ isYesHover = false; applyScales(); }, 300);
+    }, { passive:true });
+
+    let lastTeleportAt = 0;
+    function teleport(px, py){
+      const bw = noWrap.offsetWidth, bh = noWrap.offsetHeight, pad = 10;
+      const maxX = window.innerWidth  - bw - pad;
+      const maxY = window.innerHeight - bh - pad;
+      const MIN_DIST = 120;
+      const SAFE_PAD = 12;
+
+      const yesRect = btnYes.getBoundingClientRect();
+      function overlapsYes(x, y){
+        const r = { left:x, top:y, right:x+bw, bottom:y+bh };
+        const s = { left:yesRect.left-SAFE_PAD, top:yesRect.top-SAFE_PAD,
+                    right:yesRect.right+SAFE_PAD, bottom:yesRect.bottom+SAFE_PAD };
+        return !(r.right < s.left || r.left > s.right || r.bottom < s.top || r.top > s.bottom);
       }
 
-      const YES_JSON = "./Catlover.json";
-      const NO_JSON = "./catplayingwithwater.json";
+      let x, y, tries = 0;
+      do{
+        x = Math.floor(pad + Math.random() * (maxX - pad));
+        y = Math.floor(pad + Math.random() * (maxY - pad));
+        tries++;
+        const nearPointer = (px!=null && py!=null) ? Math.hypot(x-px, y-py) < MIN_DIST : false;
+        if(!nearPointer && !overlapsYes(x,y)) break;
+      }while(tries < 80);
 
-      btnYes.addEventListener("mouseenter", () => showLottie(YES_JSON));
-      btnNo.addEventListener("mouseenter", () => showLottie(NO_JSON));
-      btnYes.addEventListener("focus", () => showLottie(YES_JSON));
-      btnNo.addEventListener("focus", () => showLottie(NO_JSON));
-      btnYes.addEventListener("touchstart", () => showLottie(YES_JSON), {
-        passive: true,
-      });
-      btnNo.addEventListener("touchstart", () => showLottie(NO_JSON), {
-        passive: true,
-      });
-
-      const STEP = 0.06;
-      const MIN_SCALE = 0.6;
-      let yesScale = 1,
-        noScale = 1;
-
-      const HOVER_BOOST = 1.07;
-      let isYesHover = false;
-
-      function baseBtnWidth() {
-        const v = getComputedStyle(document.documentElement)
-          .getPropertyValue("--btn-w")
-          .trim();
-        return parseFloat(v);
-      }
-      function targetYesScale() {
-        const targetWidth = 0.65 * window.innerWidth;
-        return Math.max(1, targetWidth / baseBtnWidth());
-      }
-      function clampToTarget() {
-        const t = targetYesScale();
-        if (yesScale > t) yesScale = t;
-      }
-      function applyScales() {
-        const scaleDisplayYes = yesScale * (isYesHover ? HOVER_BOOST : 1);
-        btnYes.style.transform = `scale(${scaleDisplayYes})`;
-        btnNo.style.transform = `scale(${noScale})`;
-        btnYes.style.zIndex = scaleDisplayYes >= noScale ? 10001 : 1;
-      }
-      function bumpOneStep() {
-        const t = targetYesScale();
-        if (yesScale < t) {
-          yesScale = Math.min(yesScale + STEP, t);
+      if(overlapsYes(x,y)){
+        if(yesRect.top - bh - SAFE_PAD > 0){
+          y = Math.max(pad, yesRect.top - bh - SAFE_PAD);
+        }else{
+          y = Math.min(maxY, yesRect.bottom + SAFE_PAD);
         }
-        noScale = Math.max(noScale - STEP, MIN_SCALE);
-        applyScales();
+        x = Math.min(maxX, Math.max(pad, x));
       }
 
-      btnYes.addEventListener("mouseenter", () => {
-        isYesHover = true;
-        applyScales();
-      });
-      btnYes.addEventListener("mouseleave", () => {
-        isYesHover = false;
-        applyScales();
-      });
-      btnYes.addEventListener(
-        "touchstart",
-        () => {
-          isYesHover = true;
-          applyScales();
-          setTimeout(() => {
-            isYesHover = false;
-            applyScales();
-          }, 300);
-        },
-        { passive: true }
-      );
+      noWrap.style.left = x + "px";
+      noWrap.style.top  = y + "px";
+      noWrap.style.transform = "none";
+    }
 
-      let lastTeleportAt = 0;
-      function teleport(px, py) {
-        const bw = noWrap.offsetWidth,
-          bh = noWrap.offsetHeight,
-          pad = 10;
-        const maxX = window.innerWidth - bw - pad;
-        const maxY = window.innerHeight - bh - pad;
-        const MIN_DIST = 120;
-        let x,
-          y,
-          tries = 0;
-        do {
-          x = Math.floor(pad + Math.random() * (maxX - pad));
-          y = Math.floor(pad + Math.random() * (maxY - pad));
-          tries++;
-          if (px == null || py == null) break;
-        } while (Math.hypot(x - px, y - py) < MIN_DIST && tries < 30);
-
-        noWrap.style.left = x + "px";
-        noWrap.style.top = y + "px";
+    function startRun(e){
+      if(!noWrap.classList.contains("fixed")){
+        const r = noWrap.getBoundingClientRect();
+        noWrap.classList.add("fixed");
+        noWrap.style.left = r.left + "px";
+        noWrap.style.top  = r.top  + "px";
         noWrap.style.transform = "none";
       }
-      function startRun(e) {
-        if (!noWrap.classList.contains("fixed")) {
-          const r = noWrap.getBoundingClientRect();
-          noWrap.classList.add("fixed");
-          noWrap.style.left = r.left + "px";
-          noWrap.style.top = r.top + "px";
-          noWrap.style.transform = "none";
-        }
 
-        const now = Date.now();
-        if (now - lastTeleportAt > 50) {
-          showLottie(NO_JSON);
-          teleport(e?.clientX, e?.clientY);
-          bumpOneStep();
-          lastTeleportAt = now;
-        }
+      const now = Date.now();
+      if(now - lastTeleportAt > 50){
+        showVisual(NO_VIS);
+        teleport(e?.clientX, e?.clientY);
+        bumpOneStep();
+        setRandomTitle();
+        lastTeleportAt = now;
       }
-      noWrap.addEventListener("pointerenter", startRun);
-      noWrap.addEventListener("pointermove", startRun);
-      noWrap.addEventListener("touchstart", (e) => startRun(e.touches[0]), {
-        passive: true,
-      });
+    }
 
-      btnYes.addEventListener("click", () => {
-        window.location.href = "love.html";
-      });
+    noWrap.addEventListener("pointerenter", startRun);
+    noWrap.addEventListener("pointermove",  startRun);
+    noWrap.addEventListener("touchstart",   (e)=>startRun(e.touches[0]), { passive:true });
 
-      window.addEventListener("load", () => {
-        showLottie(YES_JSON);
-        placeLottieAboveTitle();
-        clampToTarget();
-        applyScales();
-      });
-    </script>
-  </body>
+    btnYes.addEventListener("click", ()=>{ window.location.href = "love.html"; });
+
+    window.addEventListener("load", ()=>{
+      showVisual(YES_VIS);     
+      placeLottieAboveTitle();
+      clampToTarget();
+      applyScales();
+    });
+  </script>
+</body>
 </html>

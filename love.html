@@ -88,7 +88,7 @@
   <div class="stage">
     <!-- Lottie CAT KISS -->
     <div id="kiss" aria-hidden="true"></div>
-    <div class="msg">Tớ biết mà! Tớ cũng thích cậu nhiều lắm 💗</div>
+    <div class="msg">Anh biết mà! Anh cũng thích em nhiều lắm 💗</div>
   </div>
 
   <!-- Mưa tim bay lên -->
@@ -96,21 +96,18 @@
 
   <button class="back" onclick="history.back()">◀ Quay lại</button>
 
-  <!-- Lottie-web -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
   <script>
-    // Nạp Lottie: CAT KISS.json
     const anim = lottie.loadAnimation({
       container: document.getElementById('kiss'),
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      path: './CATKISS.json'   // đảm bảo tên đúng y như file của bạn
+      path: './CATKISS.json'   
     });
 
-    // Tạo các trái tim bay từ dưới lên
     const hearts = document.getElementById('hearts');
-    const HEARTS_COUNT = 46;  // tăng/giảm số lượng
+    const HEARTS_COUNT = 49;  // tăng/giảm số lượng
     const EMOJIS = ['💗','💖','💓','💞','💘','💝','💟'];
 
     for (let i = 0; i < HEARTS_COUNT; i++) {
